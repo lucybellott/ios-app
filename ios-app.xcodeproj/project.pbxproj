@@ -13,6 +13,7 @@
 		4E28267C2C21FE6B0098AD7B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E28267B2C21FE6B0098AD7B /* Preview Assets.xcassets */; };
 		4E2826842C2204090098AD7B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2826832C2204090098AD7B /* LocationManager.swift */; };
 		4E2826872C2215860098AD7B /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2826862C2215860098AD7B /* WelcomeView.swift */; };
+		4E2826892C2223120098AD7B /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2826882C2223120098AD7B /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		4E28267B2C21FE6B0098AD7B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4E2826832C2204090098AD7B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		4E2826862C2215860098AD7B /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		4E2826882C2223120098AD7B /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			children = (
 				4E2826762C21FE6B0098AD7B /* ContentView.swift */,
 				4E2826862C2215860098AD7B /* WelcomeView.swift */,
+				4E2826882C2223120098AD7B /* LoadingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -162,6 +165,7 @@
 				4E2826772C21FE6B0098AD7B /* ContentView.swift in Sources */,
 				4E2826752C21FE6B0098AD7B /* ios_appApp.swift in Sources */,
 				4E2826842C2204090098AD7B /* LocationManager.swift in Sources */,
+				4E2826892C2223120098AD7B /* LoadingView.swift in Sources */,
 				4E2826872C2215860098AD7B /* WelcomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,6 +300,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ios-app/Preview Content\"";
+				DEVELOPMENT_TEAM = 3T3PM963J4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -324,6 +329,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ios-app/Preview Content\"";
+				DEVELOPMENT_TEAM = 3T3PM963J4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
