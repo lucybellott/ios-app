@@ -30,9 +30,27 @@ struct WeatherView: View {
                 
                 VStack {
                     HStack{
+                        VStack(spacing: 20){
+                            Image(systemName: "cloud")
+                                .font(.system(size:50))
+                            
+                            Text("\(weather.weather[0].main)")
+                            
+                        }
+                        .frame(width: 150, alignment: .leading)
+                        
+                        Spacer()
+                        
                         Text("\(kelvinToFahrenheit(weather.main.temp).roundDouble())°F")
                             .font(.system(size:100))
+                            .fontWeight(.bold)
+                            .padding()
                     }
+                    
+                    Spacer().frame(height: 80)
+                    
+                    AsyncImage(url: URL(string: "https://cdn-icons-png.freepik.com/512/3474/3474032.png"))
+                    
                 }
                 .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
             }
