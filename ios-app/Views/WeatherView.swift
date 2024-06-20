@@ -50,12 +50,35 @@ struct WeatherView: View {
                     Spacer().frame(height: 80)
                     
                     AsyncImage(url: URL(string: "https://cdn-icons-png.freepik.com/512/3474/3474032.png"))
+                    { image in image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 300)
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                    Spacer()
                     
                 }
                 .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
             }
             .padding()
             .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
+            
+            VStack{
+                Spacer()
+                
+                VStack (alignment: .leading, spacing:20) {
+                    
+                }
+                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
+                .padding()
+                .padding(.bottom, 20)
+                .foregroundColor(Color(hue: 0.637, saturation: 0.822, brightness: 0.456))
+                .background(.white)
+                .cornerRadius(20, corners: [.topLeft, .topRight])
+            }
+            
         }
         .edgesIgnoringSafeArea(.bottom)
         .background(Color(hue: 0.637, saturation: 0.822, brightness: 0.456))
