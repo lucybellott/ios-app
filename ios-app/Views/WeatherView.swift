@@ -10,7 +10,7 @@ import SwiftUI
 struct WeatherView: View {
     var weather: ResponseBody
     
-    // Function to convert Kelvin to Fahrenheit
+     //Function to convert Kelvin to Fahrenheit
         func kelvinToFahrenheit(_ kelvin: Double) -> Double {
             return (kelvin - 273.15) * 9/5 + 32
         }
@@ -21,7 +21,7 @@ struct WeatherView: View {
                 VStack(alignment: .leading, spacing: 5) {
                     Text(weather.name)
                         .bold().font(.title)
-                    Text("Today \(Date().formatted(.dateTime.month().day().hour().minute()))")
+                    Text("\(Date().formatted(.dateTime.month().day().hour().minute()))")
                         .fontWeight(.light)
                     }
                 .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
@@ -41,7 +41,7 @@ struct WeatherView: View {
                         
                         Spacer()
                         
-                        Text("\(kelvinToFahrenheit(weather.main.temp).roundDouble())°")
+                        Text(kelvinToFahrenheit(weather.main.temp).roundDouble() + "°")
                             .font(.system(size:90))
                             .fontWeight(.bold)
 //                            .padding()
@@ -70,7 +70,7 @@ struct WeatherView: View {
                 Spacer()
                 
                 VStack (alignment: .leading, spacing:20) {
-                    Text("Current weather").bold().padding(.bottom)
+                    Text("Today").bold().padding(.bottom)
                     
                     HStack{
                         WeatherRow(logo: "thermometer", name: "Min", value:(kelvinToFahrenheit(weather.main.tempMin).roundDouble()) + "°")
