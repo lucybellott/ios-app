@@ -19,6 +19,7 @@
 		4E28268F2C238D2B0098AD7B /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E28268E2C238D2B0098AD7B /* ModelData.swift */; };
 		4E2826912C238DF50098AD7B /* weatherData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E2826902C238DF50098AD7B /* weatherData.json */; };
 		4E2826932C23906B0098AD7B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2826922C23906B0098AD7B /* Extensions.swift */; };
+		4E2826962C2489A00098AD7B /* WeatherRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2826952C2489A00098AD7B /* WeatherRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		4E28268E2C238D2B0098AD7B /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		4E2826902C238DF50098AD7B /* weatherData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = weatherData.json; sourceTree = "<group>"; };
 		4E2826922C23906B0098AD7B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		4E2826952C2489A00098AD7B /* WeatherRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				4E2826742C21FE6B0098AD7B /* ios_appApp.swift */,
+				4E2826942C2489430098AD7B /* Components */,
 				4E2826852C2214AA0098AD7B /* Views */,
 				4E2826822C2203D30098AD7B /* Managers */,
 				4E2826782C21FE6B0098AD7B /* Assets.xcassets */,
@@ -105,6 +108,14 @@
 				4E28268C2C238C7B0098AD7B /* WeatherView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		4E2826942C2489430098AD7B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				4E2826952C2489A00098AD7B /* WeatherRow.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,6 +194,7 @@
 				4E2826772C21FE6B0098AD7B /* ContentView.swift in Sources */,
 				4E2826752C21FE6B0098AD7B /* ios_appApp.swift in Sources */,
 				4E2826842C2204090098AD7B /* LocationManager.swift in Sources */,
+				4E2826962C2489A00098AD7B /* WeatherRow.swift in Sources */,
 				4E2826892C2223120098AD7B /* LoadingView.swift in Sources */,
 				4E28268F2C238D2B0098AD7B /* ModelData.swift in Sources */,
 				4E28268D2C238C7B0098AD7B /* WeatherView.swift in Sources */,
