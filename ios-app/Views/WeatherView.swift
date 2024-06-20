@@ -41,19 +41,20 @@ struct WeatherView: View {
                         
                         Spacer()
                         
-                        Text("\(kelvinToFahrenheit(weather.main.temp).roundDouble())°F")
-                            .font(.system(size:100))
+                        Text("\(kelvinToFahrenheit(weather.main.temp).roundDouble())°")
+                            .font(.system(size:90))
                             .fontWeight(.bold)
-                            .padding()
+//                            .padding()
                     }
                     
                     Spacer().frame(height: 80)
                     
-                    AsyncImage(url: URL(string: "https://cdn-icons-png.freepik.com/512/3474/3474032.png"))
+                    AsyncImage(url: URL(string: "https://cdn-icons-png.flaticon.com/512/6503/6503066.png"))
                     { image in image
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 300)
+                                    
                                 } placeholder: {
                                     ProgressView()
                                 }
@@ -69,7 +70,18 @@ struct WeatherView: View {
                 Spacer()
                 
                 VStack (alignment: .leading, spacing:20) {
+                    Text("Current weather").bold().padding(.bottom)
                     
+                    HStack{
+                        WeatherRow(logo: "thermometer", name: "Min", value:(kelvinToFahrenheit(weather.main.tempMin).roundDouble()) + "°")
+                        Spacer()
+                        WeatherRow(logo: "thermometer", name: "Max", value:(kelvinToFahrenheit(weather.main.tempMax).roundDouble()) + "°")
+                    }
+                    HStack{
+                        WeatherRow(logo: "wind", name: "Wind", value:(weather.wind.speed).roundDouble() + "m/s")
+                        Spacer()
+                        WeatherRow(logo: "humidity.fill", name: "Humidity", value:(weather.main.humidity.roundDouble() + "%"))
+                    }
                 }
                 .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
                 .padding()
