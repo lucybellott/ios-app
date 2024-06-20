@@ -14,7 +14,7 @@ struct WelcomeView: View {
     var body: some View {
         VStack {
             VStack(spacing: 20){
-                Text("Welcome to the weather app")
+                Text("My Weather App ☁️")
                     .bold().font(.title)
                 Text("Please share your current location")
                     .padding()
