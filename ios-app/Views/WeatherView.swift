@@ -10,7 +10,10 @@ import SwiftUI
 
 struct WeatherView: View {
     @State private var city: String = ""
-    var weather: ResponseBody
+    @State var weather: ResponseBody
+    @State private var isLoading: Bool = false
+    @State private var errorMessage: String?
+    @StateObject private var weatherManager = WeatherManager()
     
     // Function to convert Kelvin to Fahrenheit
     func kelvinToFahrenheit(_ kelvin: Double) -> Double {
@@ -89,15 +92,30 @@ struct WeatherView: View {
         }
     }
     
+    // Function to load weather data for the entered city
+        func loadWeather() {
+            isLoading = true
+            errorMessage = nil
+            
+            Task {
+                do {
+                    weather = try await weatherManager.getWeather(forCity: city)
+                } catch {
+                    errorMessage = "Could not fetch weather data. Please try again."
+                    print("Error fetching weather: \(error.localizedDescription)")
+                }
+                isLoading = false
+            }
+        }
+    
     var body: some View {
-        //        VStack {
-        //            SearchBar(text: $city)
-        //                .padding()
-    //             }
-            
-            
-            ZStack(alignment: .leading) {
+        VStack(alignment: .leading) {
+            GeometryReader { geometry in
                 VStack {
+                    VStack {
+                        SearchBar(text: $city)
+                            .padding()
+                    }
                     VStack(alignment: .leading, spacing: 5) {
                         Text(weather.name)
                             .bold().font(.title)
@@ -125,7 +143,7 @@ struct WeatherView: View {
                                 .fontWeight(.bold)
                         }
                         
-                        Spacer().frame(height: 80)
+                        Spacer().frame(height: 15)
                         
                         AsyncImage(url: getImageUrl(for: weather.weather[0].main)) { image in
                             image
@@ -149,8 +167,8 @@ struct WeatherView: View {
                 VStack {
                     Spacer()
                     
-                    VStack(alignment: .leading, spacing: 20) {
-                        Text("Today").bold().padding(.bottom)
+                    VStack(alignment: .leading, spacing: 15) {
+                        Text("Current Weather").bold().padding(.bottom)
                         
                         HStack {
                             WeatherRow(logo: "thermometer", name: "Min", value: (kelvinToFahrenheit(weather.main.tempMin).roundDouble()) + "°")
@@ -171,6 +189,7 @@ struct WeatherView: View {
                     .cornerRadius(20, corners: [.topLeft, .topRight])
                 }
             }
+        }
         
             
         .edgesIgnoringSafeArea(.bottom)

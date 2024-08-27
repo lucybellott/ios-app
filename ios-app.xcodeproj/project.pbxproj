@@ -24,7 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4E2826712C21FE6B0098AD7B /* ios-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E2826712C21FE6B0098AD7B /* WoofWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WoofWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E2826742C21FE6B0098AD7B /* ios_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_appApp.swift; sourceTree = "<group>"; };
 		4E2826762C21FE6B0098AD7B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4E2826782C21FE6B0098AD7B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -63,7 +63,7 @@
 		4E2826722C21FE6B0098AD7B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4E2826712C21FE6B0098AD7B /* ios-app.app */,
+				4E2826712C21FE6B0098AD7B /* WoofWeather.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -124,9 +124,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4E2826702C21FE6B0098AD7B /* ios-app */ = {
+		4E2826702C21FE6B0098AD7B /* WoofWeather */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4E28267F2C21FE6B0098AD7B /* Build configuration list for PBXNativeTarget "ios-app" */;
+			buildConfigurationList = 4E28267F2C21FE6B0098AD7B /* Build configuration list for PBXNativeTarget "WoofWeather" */;
 			buildPhases = (
 				4E28266D2C21FE6B0098AD7B /* Sources */,
 				4E28266E2C21FE6B0098AD7B /* Frameworks */,
@@ -136,9 +136,9 @@
 			);
 			dependencies = (
 			);
-			name = "ios-app";
+			name = WoofWeather;
 			productName = "ios-app";
-			productReference = 4E2826712C21FE6B0098AD7B /* ios-app.app */;
+			productReference = 4E2826712C21FE6B0098AD7B /* WoofWeather.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -169,7 +169,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4E2826702C21FE6B0098AD7B /* ios-app */,
+				4E2826702C21FE6B0098AD7B /* WoofWeather */,
 			);
 		};
 /* End PBXProject section */
@@ -339,6 +339,8 @@
 				DEVELOPMENT_TEAM = 3T3PM963J4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WoofWeather;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -368,6 +370,8 @@
 				DEVELOPMENT_TEAM = 3T3PM963J4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WoofWeather;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -398,7 +402,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4E28267F2C21FE6B0098AD7B /* Build configuration list for PBXNativeTarget "ios-app" */ = {
+		4E28267F2C21FE6B0098AD7B /* Build configuration list for PBXNativeTarget "WoofWeather" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4E2826802C21FE6B0098AD7B /* Debug */,

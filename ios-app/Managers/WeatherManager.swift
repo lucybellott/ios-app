@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-class WeatherManager {
+class WeatherManager: ObservableObject {
     private let apiKey = "d38b20925679d2d417fddef4f8cb381a"
     
     func getCurrentWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees) async throws -> ResponseBody {
