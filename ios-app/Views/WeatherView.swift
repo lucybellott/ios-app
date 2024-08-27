@@ -60,40 +60,49 @@ struct WeatherView: View {
     
     // Function to get the system image name based on the weather condition
     func getSystemImageName(for weatherCondition: String) -> String {
-        switch weatherCondition.lowercased() {
-        case "clouds":
-            return "cloud"
-        case "rain":
-            return "cloud.rain"
-        case "snow":
-            return "cloud.snow"
-        case "clear":
-            return "sun.max"
-        case "thunderstorm":
-            return "cloud.bolt"
-        case "drizzle":
-            return "cloud.drizzle"
-        case "mist":
-            return "cloud.fog"
-        case "smoke":
-            return "smoke"
-        case "haze":
-            return "sun.haze"
-        case "dust", "sand", "ash":
-            return "aqi.low"
-        case "fog":
-            return "cloud.fog"
-        case "squall":
-            return "wind"
-        case "tornado":
-            return "tornado"
-        default:
-            return "questionmark"
-        }
+        let imageName: String
+                
+                switch weatherCondition.lowercased() {
+                case "clouds":
+                    imageName = "cloud"
+                case "rain":
+                    imageName = "cloud.rain"
+                case "snow":
+                    imageName = "cloud.snow"
+                case "clear":
+                    imageName = "sun.max"
+                case "thunderstorm":
+                    imageName = "cloud.bolt"
+                case "drizzle":
+                    imageName = "cloud.drizzle"
+                case "mist":
+                    imageName = "cloud.fog"
+                case "smoke":
+                    imageName = "smoke"
+                case "haze":
+                    imageName = "sun.haze"
+                case "dust", "sand", "ash":
+                    imageName = "aqi.low"
+                case "fog":
+                    imageName = "cloud.fog"
+                case "squall":
+                    imageName = "wind"
+                case "tornado":
+                    imageName = "tornado"
+                default:
+                    imageName = "questionmark"
+                }
+
+                // Ensure the system image exists
+                return Image(systemName: imageName) != nil ? imageName : "questionmark"
     }
     
     // Function to load weather data for the entered city
         func loadWeather() {
+            guard !city.isEmpty else {
+                errorMessage = "Please enter a city name."
+                return
+            }
             isLoading = true
             errorMessage = nil
             
@@ -107,15 +116,29 @@ struct WeatherView: View {
                 isLoading = false
             }
         }
-    
+    // Computed property to determine if it is daytime or nighttime
+        private var isDayTime: Bool {
+            let currentHour = Calendar.current.component(.hour, from: Date())
+            return currentHour >= 6 && currentHour < 18
+        }
+        
     var body: some View {
         VStack(alignment: .leading) {
             GeometryReader { geometry in
                 VStack {
-                    VStack {
+                    HStack {
                         SearchBar(text: $city)
-                            .padding()
+                            //.padding()
+                        Button(action: loadWeather) {
+                            Text("🔎")
+                                .bold()
+                                .padding()
+                                .background(Color.clear)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                        }
                     }
+                    
                     VStack(alignment: .leading, spacing: 5) {
                         Text(weather.name)
                             .bold().font(.title)
@@ -193,7 +216,7 @@ struct WeatherView: View {
         
             
         .edgesIgnoringSafeArea(.bottom)
-        .background(Color(hue: 0.637, saturation: 0.822, brightness: 0.456))
+        .background(isDayTime ? Color.blue : Color(red: 0.0, green: 0.0, blue: 0.5))
         .preferredColorScheme(.dark)
     }
 }
