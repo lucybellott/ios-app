@@ -21,44 +21,45 @@ struct WeatherView: View {
     }
     
     // Function to get the image URL based on the weather condition
-    func getImageUrl(for weatherCondition: String) -> URL? {
-        switch weatherCondition.lowercased() {
-        case "clouds":
-            return URL(string: "https://i.pinimg.com/originals/84/9a/2e/849a2ef3fe74c896f94a462aa0bc4078.jpg")
-        case "rain":
-            return URL(string: "https://leadervet.com/wp-content/uploads/2019/09/Can-Weather-Affect-a-Dogs-Behavior.jpg")
-        case "snow":
-            return URL(string: "https://www.shutterstock.com/image-photo/funny-puppy-dog-corgi-warm-600nw-2104482491.jpg")
-        case "clear":
-            return URL(string: "https://www.theinertia.com/wp-content/uploads/2014/10/dog-beach.jpg")
-        case "thunderstorm":
-            return URL(string: "https://tippvet.com/wp-content/uploads/2020/08/bigstock-A-Cute-Little-Beagle-Dog-Hides-372628669_embiggened-cropped.png")
-        case "drizzle":
-            return URL(string: "https://www.dogingtonpost.com/wp-content/uploads/2020/09/rainyday-min-1000x600.jpg")
-        case "mist":
-            return URL(string: "https://dogdiscoveries.com/.image/t_share/MTg0OTc5NTkxODY4MTk2MzI3/foggs.jpg")
-        case "smoke":
-            return URL(string: "https://i.pinimg.com/736x/5f/91/f2/5f91f239c02fdcc83c9d6b78c89c76ea.jpg")
-        case "haze":
-            return URL(string: "https://img.freepik.com/premium-photo/white-dog-stands-fog-foggy-day_357532-14303.jpg")
-        case "dust":
-            return URL(string: "https://www.alphapaw.com/wp-content/uploads/2020/07/photo_2020-11-05_16-39-33.jpg")
-        case "fog":
-            return URL(string: "https://pbs.twimg.com/media/BfJ_3mMCUAA-O87?format=png&name=large")
-        case "sand":
-            return URL(string: "https://www.onegreenplanet.org/wp-content/uploads/2023/07/shutterstock_1131985073-1-scaled.jpg")
-        case "ash":
-            return URL(string: "https://www.madpaws.com.au/wp-content/uploads/2019/07/a.-staffordshire-terrier.jpg")
-        case "squall":
-            return URL(string: "https://cdn-icons-png.flaticon.com/512/1779/1779807.png")
-        case "tornado":
-            return URL(string: "https://i.pinimg.com/736x/09/c3/ff/09c3ffc814457f208550dd32f92c6135.jpg")
-        default:
-            return URL(string: "https://www.shutterstock.com/image-photo/funny-smile-dog-sunglasses-600nw-2251348601.jpg")
-        }
+    func getLocalImageName(for weatherCondition: String) -> String {
+            switch weatherCondition.lowercased() {
+            case "clouds":
+                return "clouds"
+            case "rain":
+                return "rain"
+            case "snow":
+                return "snow"
+            case "clear":
+                return "sunny"
+            case "thunderstorm":
+                return "thunder"
+            case "drizzle":
+                return "drizzle"
+            case "mist":
+                return "mist"
+            case "smoke":
+                return "sauna"
+            case "haze":
+                return "hazy"
+            case "dust":
+                return "dust"
+            case "fog":
+                return "fog"
+            case "sand":
+                return "sand"
+            case "ash":
+                return "ash"
+            case "squall":
+                return "squall"
+            case "tornado":
+                return "tornado"
+            default:
+                return "sauna"
+            }
     }
+
     
-    // Function to get the system image name based on the weather condition
+    // Function to get the system icon name based on the weather condition
     func getSystemImageName(for weatherCondition: String) -> String {
         let imageName: String
                 
@@ -128,12 +129,11 @@ struct WeatherView: View {
                 VStack {
                     HStack {
                         SearchBar(text: $city)
-                            //.padding()
                         Button(action: loadWeather) {
-                            Text("🔎")
+                            Text("Search")
                                 .bold()
                                 .padding()
-                                .background(Color.clear)
+                                .background(Color.gray)
                                 .foregroundColor(.white)
                                 .cornerRadius(8)
                         }
@@ -168,16 +168,12 @@ struct WeatherView: View {
                         
                         Spacer().frame(height: 15)
                         
-                        AsyncImage(url: getImageUrl(for: weather.weather[0].main)) { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 300)
-                                .clipShape(RoundedRectangle(cornerRadius: 50))
-                            
-                        } placeholder: {
-                            ProgressView()
-                        }
+                        Image(getLocalImageName(for: weather.weather[0].main))
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 300, height: 280)
+                            .cornerRadius(40)
+                          //  .clipShape(RoundedRectangle(cornerRadius: 50))
                         
                         Spacer()
                     }
