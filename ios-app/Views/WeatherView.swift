@@ -110,6 +110,7 @@ struct WeatherView: View {
             Task {
                 do {
                     weather = try await weatherManager.getWeather(forCity: city)
+                    city = ""
                 } catch {
                     errorMessage = "Could not fetch weather data. Please try again."
                     print("Error fetching weather: \(error.localizedDescription)")
@@ -128,14 +129,15 @@ struct WeatherView: View {
             GeometryReader { geometry in
                 VStack {
                     HStack {
-                        SearchBar(text: $city)
+                        SearchBar(text: $city, onSearch: loadWeather)
                         Button(action: loadWeather) {
                             Text("Search")
                                 .bold()
                                 .padding()
-                                .background(Color.gray)
-                                .foregroundColor(.white)
-                                .cornerRadius(8)
+                                .frame(maxHeight: 36)
+                                .background(Color.white)
+                                .foregroundColor(.blue)
+                                .cornerRadius(25)
                         }
                     }
                     
@@ -173,7 +175,6 @@ struct WeatherView: View {
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 300, height: 280)
                             .cornerRadius(40)
-                          //  .clipShape(RoundedRectangle(cornerRadius: 50))
                         
                         Spacer()
                     }

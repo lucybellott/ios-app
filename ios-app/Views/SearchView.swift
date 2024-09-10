@@ -9,10 +9,11 @@ import SwiftUI
 
 struct SearchBar: View {
     @Binding var text: String
+    var onSearch: () -> Void
 
     var body: some View {
         HStack {
-            TextField("Enter city name...", text: $text)
+            TextField("Enter city name...", text: $text, onCommit: onSearch)
                 .padding(7)
                 .padding(.horizontal, 25)
                 .background(Color(.systemGray6))
@@ -26,6 +27,7 @@ struct SearchBar: View {
                     }
                 )
                 .padding(.horizontal, 10)
+                .frame(height: 50)
         }
         .padding(.top, 10)
     }
