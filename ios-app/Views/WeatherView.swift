@@ -24,6 +24,17 @@ struct WeatherView: View {
         return (kelvin - 273.15) * 9/5 + 32
     }
     
+    // Function to calculate asphalt temperature based on air temperature
+    func calculateAsphaltTemperature(airTemp: Double) -> Int {
+        return Int(airTemp * 1.2 + 20)
+    }
+
+    // Function to calculate concrete temperature based on air temperature
+    func calculateConcreteTemperature(airTemp: Double) -> Int {
+        return Int(airTemp * 1.1 + 15)
+    }
+    
+
     // Function to get the image URL based on the weather condition
     func getLocalImageName(for weatherCondition: String) -> String {
         switch weatherCondition.lowercased() {
@@ -125,6 +136,10 @@ struct WeatherView: View {
     }
     
     var body: some View {
+        let airTemp = kelvinToFahrenheit(weather.main.temp)
+        let asphaltTemp = calculateAsphaltTemperature(airTemp: airTemp)
+        let concreteTemp = calculateConcreteTemperature(airTemp: airTemp)
+        
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading) {
