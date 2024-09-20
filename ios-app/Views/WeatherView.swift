@@ -149,7 +149,6 @@ struct WeatherView: View {
                                 SearchBar(text: $city, onSearch: loadWeather)
                                 Button(action: {
                                     loadWeather()
-                                    city = ""
                                 }) {
                                     Text("Search")
                                         .bold()
@@ -160,7 +159,7 @@ struct WeatherView: View {
                                         .cornerRadius(25)
                                 }
                             }
-                            .padding(.top, -60)
+                            .padding(.top, -53)
                             
                             VStack(alignment: .leading, spacing: 5) {
                                 Text(weather.name)
