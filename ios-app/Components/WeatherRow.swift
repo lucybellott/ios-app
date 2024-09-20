@@ -24,6 +24,7 @@ struct WeatherRow: View {
             
             VStack(alignment: .leading, spacing: 8) {
                 Text(name)
+                    .bold()
                     .font(.caption)
                 
                 Text(value)

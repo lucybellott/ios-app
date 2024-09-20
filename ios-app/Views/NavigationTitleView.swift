@@ -14,7 +14,7 @@ struct NavigationTitleView: View {
                 .font(.headline)
                 .foregroundColor(.white)
             
-            Image(systemName: "pawprint") // Use your preferred SF Symbol
+            Image(systemName: "pawprint") 
                 .font(.headline)
                 .foregroundColor(.white)
         }

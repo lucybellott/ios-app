@@ -181,6 +181,7 @@ struct WeatherView: View {
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 300, height: 280)
                                     .cornerRadius(40)
+                                    .padding(.bottom, 20)
                                 
                                 Spacer()
                             }
@@ -192,7 +193,7 @@ struct WeatherView: View {
                                 HStack {
                                     WeatherRow(logo: "thermometer", name: "Min", value: (kelvinToFahrenheit(weather.main.tempMin).roundDouble()) + "°")
                                     Spacer()
-                                    WeatherRow(logo: "thermometer", name: "Max", value: (kelvinToFahrenheit(weather.main.tempMax).roundDouble()) + "°")
+                                    WeatherRow(logo: "thermometer", name: "Max", value: (kelvinToFahrenheit(weather.main.tempMax).roundDouble()) + "°  ")
                                 }
                                 HStack {
                                     WeatherRow(logo: "wind", name: "Wind", value: (weather.wind.speed.roundDouble() + "m/s"))
@@ -200,9 +201,9 @@ struct WeatherView: View {
                                     WeatherRow(logo: "humidity.fill", name: "Humidity", value: (weather.main.humidity.roundDouble() + "%"))
                                 }
                                 HStack {
-                                    WeatherRow(logo: "thermometer", name: "Asphalt", value: "\(asphaltTemp)°")
+                                    WeatherRow(logo: "pawprint", name: "Asphalt", value: "\(asphaltTemp)°")
                                     Spacer()
-                                    WeatherRow(logo: "thermometer", name: "Concrete", value: "\(concreteTemp)°")
+                                    WeatherRow(logo: "pawprint.fill", name: "Concrete", value: "\(concreteTemp)°")
                                 }
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -217,14 +218,13 @@ struct WeatherView: View {
                     }
                 }
             }
-           // .navigationTitle("WoofWeather")
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     HStack {
                         Image(systemName: "pawprint.fill")
                             .foregroundColor(.white)
                         Text("WoofWeather")
-                            .font(.system(size: 18, weight: .bold))
+                            .font(.system(size: 20, weight: .bold))
                             .foregroundColor(.white)
                     }
                 }
