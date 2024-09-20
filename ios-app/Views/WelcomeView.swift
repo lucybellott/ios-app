@@ -14,9 +14,9 @@ struct WelcomeView: View {
     var body: some View {
         VStack {
             VStack(spacing: 20){
-                Text("Woof Weather 🐶")
+                Text("WoofWeather 🐶")
                     .bold().font(.title)
-                Text("Please share your current location")
+                Text("Please share your location")
                     .padding()
             }
             .multilineTextAlignment(.center)

@@ -16,8 +16,8 @@ struct WeatherView: View {
     @StateObject private var weatherManager = WeatherManager()
     
     // Hard-coded temperatures for demonstration
-    private let asphaltTemp: Double = 95.0 // Example temperature in Fahrenheit
-    private let concreteTemp: Double = 85.0 // Example temperature in Fahrenheit
+    private let asphaltTemp: Int = 95 // Example temperature in Fahrenheit
+    private let concreteTemp: Int = 85 // Example temperature in Fahrenheit
     
     // Function to convert Kelvin to Fahrenheit
     func kelvinToFahrenheit(_ kelvin: Double) -> Double {
@@ -145,6 +145,7 @@ struct WeatherView: View {
                                         .cornerRadius(25)
                                 }
                             }
+                            .padding(.top, -60)
                             
                             VStack(alignment: .leading, spacing: 5) {
                                 Text(weather.name)
@@ -199,9 +200,9 @@ struct WeatherView: View {
                                     WeatherRow(logo: "humidity.fill", name: "Humidity", value: (weather.main.humidity.roundDouble() + "%"))
                                 }
                                 HStack {
-                                    WeatherRow(logo: "thermometer", name: "Asphalt Temp", value: "\(asphaltTemp)°")
+                                    WeatherRow(logo: "thermometer", name: "Asphalt", value: "\(asphaltTemp)°")
                                     Spacer()
-                                    WeatherRow(logo: "thermometer", name: "Concrete Temp", value: "\(concreteTemp)°")
+                                    WeatherRow(logo: "thermometer", name: "Concrete", value: "\(concreteTemp)°")
                                 }
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -216,8 +217,18 @@ struct WeatherView: View {
                     }
                 }
             }
-            .navigationTitle("Woof Weather")
-         
+           // .navigationTitle("WoofWeather")
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    HStack {
+                        Image(systemName: "pawprint.fill")
+                            .foregroundColor(.white)
+                        Text("WoofWeather")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundColor(.white)
+                    }
+                }
+            }
             .edgesIgnoringSafeArea(.bottom)
             .background(isDayTime ? Color.blue : Color(red: 0.0, green: 0.0, blue: 0.5))
             .preferredColorScheme(.dark)
