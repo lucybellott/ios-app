@@ -14,8 +14,9 @@ struct SearchBar: View {
     var body: some View {
         HStack {
             TextField("Enter city name...", text: $text, onCommit: onSearch)
-                .padding(7)
+                .padding(.vertical, 10)
                 .padding(.horizontal, 25)
+                .padding(.leading, 10)
                 .background(Color(.systemGray6))
                 .cornerRadius(8)
                .overlay(
@@ -23,12 +24,22 @@ struct SearchBar: View {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.gray)
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading, 8)
+                            .padding(7)
                     }
                 )
                 .padding(.horizontal, 10)
                 .frame(height: 50)
         }
         .padding(.top, 10)
+    }
+}
+
+struct SearchBar_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchBar(text: .constant("Sample City"), onSearch: {
+            print("Search initiated")
+        })
+        .padding()
+        .previewLayout(.sizeThatFits)
     }
 }
