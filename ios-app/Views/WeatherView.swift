@@ -15,9 +15,6 @@ struct WeatherView: View {
     @State private var errorMessage: String?
     @StateObject private var weatherManager = WeatherManager()
     
-    // Hard-coded temperatures for demonstration
-    private let asphaltTemp: Int = 95 // Example temperature in Fahrenheit
-    private let concreteTemp: Int = 85 // Example temperature in Fahrenheit
     
     // Function to convert Kelvin to Fahrenheit
     func kelvinToFahrenheit(_ kelvin: Double) -> Double {
@@ -107,11 +104,7 @@ struct WeatherView: View {
             imageName = "questionmark"
         }
         return Image(systemName: imageName) != nil ? imageName : "questionmark"
-//        if UIImage(systemName: imageName) != nil {
-//                return imageName
-//            } else {
-//                return "questionmark"
-//            }
+
     }
     
     // Function to load weather data for the entered city
