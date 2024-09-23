@@ -106,7 +106,12 @@ struct WeatherView: View {
         default:
             imageName = "questionmark"
         }
-        return Image(systemName: imageName) != nil ? imageName : "questionmark"
+       // return Image(systemName: imageName) != nil ? imageName : "questionmark"
+        if UIImage(systemName: imageName) != nil {
+                return imageName
+            } else {
+                return "questionmark"
+            }
     }
     
     // Function to load weather data for the entered city
@@ -121,6 +126,7 @@ struct WeatherView: View {
         Task {
             do {
                 weather = try await weatherManager.getWeather(forCity: city)
+                city = ""
             } catch {
                 errorMessage = "Could not fetch weather data. Please try again."
                 print("Error fetching weather: \(error.localizedDescription)")

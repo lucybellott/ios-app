@@ -20,16 +20,6 @@ class WeatherManager: ObservableObject {
         let urlRequest = URLRequest(url: url)
         
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
-        
-        // Check the status code
-//                if let httpResponse = response as? HTTPURLResponse {
-//                    print("Status code: \(httpResponse.statusCode)")
-//                }
-
-                // Check the data
-//                if let jsonString = String(data: data, encoding: .utf8) {
-//                    print("Response data: \(jsonString)")
-//                }
 
                 
         guard (response as? HTTPURLResponse)?.statusCode == 200 else { fatalError("Error while fetching data") }
