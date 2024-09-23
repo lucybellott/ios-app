@@ -106,12 +106,12 @@ struct WeatherView: View {
         default:
             imageName = "questionmark"
         }
-       // return Image(systemName: imageName) != nil ? imageName : "questionmark"
-        if UIImage(systemName: imageName) != nil {
-                return imageName
-            } else {
-                return "questionmark"
-            }
+        return Image(systemName: imageName) != nil ? imageName : "questionmark"
+//        if UIImage(systemName: imageName) != nil {
+//                return imageName
+//            } else {
+//                return "questionmark"
+//            }
     }
     
     // Function to load weather data for the entered city
@@ -138,7 +138,7 @@ struct WeatherView: View {
     // Computed property to determine if it is daytime or nighttime
     private var isDayTime: Bool {
         let currentHour = Calendar.current.component(.hour, from: Date())
-        return currentHour >= 6 && currentHour < 18
+        return currentHour >= 7 && currentHour < 19
     }
     
     var body: some View {
