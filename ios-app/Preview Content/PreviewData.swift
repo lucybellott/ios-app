@@ -7,6 +7,8 @@
 
 import Foundation
 
+//Mock preview data
+
 var previewWeather: ResponseBody = load("weatherData.json")
 
 func load<T: Decodable>(_ filename: String) -> T {
