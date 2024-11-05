@@ -241,6 +241,18 @@ struct WeatherView: View {
                             .foregroundColor(.white)
                     }
                 }
+//                ToolbarItem(placement: .navigationBarTrailing) { // Added toolbar item
+//                                Button(action: {
+//                                    showingLoginSignup = true
+//                                }) {
+//                                    Text("Login/Signup")
+//                                        .foregroundColor(.white)
+//                                }
+//                            }
+//                        }
+//                        .fullScreenCover(isPresented: $showingLoginSignup) { // Present LoginSignupView
+//                            LoginSignupView()
+//                        }
             }
             .edgesIgnoringSafeArea(.bottom)
             .background(isDayTime ? Color.blue : Color(red: 0.0, green: 0.0, blue: 0.5))

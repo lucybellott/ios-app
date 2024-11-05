@@ -22,6 +22,7 @@
 		4E2826962C2489A00098AD7B /* WeatherRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2826952C2489A00098AD7B /* WeatherRow.swift */; };
 		4E2826982C24B1170098AD7B /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2826972C24B1170098AD7B /* SearchView.swift */; };
 		4E7F5E232C90EC3E00E11F6E /* NavigationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F5E222C90EC3E00E11F6E /* NavigationTitleView.swift */; };
+		4EF4A3542CDAA8F900DCB800 /* LoginSignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF4A3532CDAA8F100DCB800 /* LoginSignupView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		4E2826952C2489A00098AD7B /* WeatherRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRow.swift; sourceTree = "<group>"; };
 		4E2826972C24B1170098AD7B /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		4E7F5E222C90EC3E00E11F6E /* NavigationTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTitleView.swift; sourceTree = "<group>"; };
+		4EF4A3532CDAA8F100DCB800 /* LoginSignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignupView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 		4E2826852C2214AA0098AD7B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4EF4A3532CDAA8F100DCB800 /* LoginSignupView.swift */,
 				4E2826762C21FE6B0098AD7B /* ContentView.swift */,
 				4E2826862C2215860098AD7B /* WelcomeView.swift */,
 				4E2826882C2223120098AD7B /* LoadingView.swift */,
@@ -207,6 +210,7 @@
 				4E7F5E232C90EC3E00E11F6E /* NavigationTitleView.swift in Sources */,
 				4E2826872C2215860098AD7B /* WelcomeView.swift in Sources */,
 				4E2826982C24B1170098AD7B /* SearchView.swift in Sources */,
+				4EF4A3542CDAA8F900DCB800 /* LoginSignupView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
