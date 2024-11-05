@@ -14,6 +14,7 @@ struct WeatherView: View {
     @State private var isLoading: Bool = false
     @State private var errorMessage: String?
     @StateObject private var weatherManager = WeatherManager()
+    @State private var showingLoginSignup = false
     
     
     // Function to convert Kelvin to Fahrenheit
@@ -158,7 +159,7 @@ struct WeatherView: View {
                                         .cornerRadius(25)
                                 }
                             }
-                            .padding(.top, -53)
+                            .padding(.top, -15)
                             
                             VStack(alignment: .leading, spacing: 5) {
                                 Text(weather.name)
@@ -232,7 +233,7 @@ struct WeatherView: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .principal) {
+                ToolbarItem(placement: .navigationBarLeading) {
                     HStack {
                         Image(systemName: "pawprint.fill")
                             .foregroundColor(.white)
@@ -241,18 +242,18 @@ struct WeatherView: View {
                             .foregroundColor(.white)
                     }
                 }
-//                ToolbarItem(placement: .navigationBarTrailing) { // Added toolbar item
-//                                Button(action: {
-//                                    showingLoginSignup = true
-//                                }) {
-//                                    Text("Login/Signup")
-//                                        .foregroundColor(.white)
-//                                }
-//                            }
-//                        }
-//                        .fullScreenCover(isPresented: $showingLoginSignup) { // Present LoginSignupView
-//                            LoginSignupView()
-//                        }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                                    Button(action: {
+                                        showingLoginSignup = true
+                                    }) {
+                                        Text("Login/Signup")
+                                            .foregroundColor(.white)
+                                    }
+                                }
+                            }
+            // Present LoginSignupView when showingLoginSignup is true
+            .fullScreenCover(isPresented: $showingLoginSignup) {
+                LoginSignupView()
             }
             .edgesIgnoringSafeArea(.bottom)
             .background(isDayTime ? Color.blue : Color(red: 0.0, green: 0.0, blue: 0.5))
