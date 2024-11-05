@@ -5,7 +5,7 @@ let package = Package(
     name: "WoofWeatherBackend",
     platforms: [
        .macOS(.v13),
-       .iOS(.v13)
+       .iOS(.v15)
     ],
     dependencies: [
         // 💧 A server-side Swift web framework.

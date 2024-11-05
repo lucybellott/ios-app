@@ -25,8 +25,26 @@ struct WelcomeView: View {
             LocationButton(.shareCurrentLocation){
                 locationManager.requestLocation()
             }
+
+            
+//                        Button(action: {
+//                print("Share Location button tapped")
+//                locationManager.requestLocation()
+//            }) {
+//                Text("Share Location")
+//                    .bold()
+//                    .frame(width: 200, height: 50)
+//                    .background(Color.blue)
+//                    .foregroundColor(.white)
+//                    .cornerRadius(10)
+//            }
+         
+            
+            
+            
+            
             .cornerRadius(30)
-            .symbolVariant(/*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
+            .symbolVariant(.fill)
             .foregroundColor(.white)
             
         }
@@ -35,5 +53,5 @@ struct WelcomeView: View {
 }
 
 #Preview {
-    WelcomeView()
+    WelcomeView().environmentObject(LocationManager())
 }

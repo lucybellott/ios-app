@@ -159,7 +159,7 @@ struct WeatherView: View {
                                         .cornerRadius(25)
                                 }
                             }
-                            .padding(.top, -15)
+                            .padding(.top, -25)
                             
                             VStack(alignment: .leading, spacing: 5) {
                                 Text(weather.name)
