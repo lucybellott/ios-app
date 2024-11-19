@@ -84,7 +84,7 @@ struct LoginSignupView: View {
     }
 
     func login() {
-        guard let url = URL(string: "http://127.0.0.1:8080/signup") else {
+        guard let url = URL(string: "http://127.0.0.1:8080/login") else {
             errorMessage = "Invalid server URL."
             return
         }
