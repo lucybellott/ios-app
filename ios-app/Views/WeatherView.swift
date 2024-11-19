@@ -10,7 +10,7 @@ import SwiftUI
 
 struct WeatherView: View {
     @State private var city: String = ""
-    @State var weather: ResponseBody
+    @State var weather: ResponseBody?
     @State private var isLoading: Bool = false
     @State private var errorMessage: String?
     @StateObject private var weatherManager = WeatherManager()
@@ -135,101 +135,238 @@ struct WeatherView: View {
         return currentHour >= 7 && currentHour < 19
     }
     
-    var body: some View {
-        let airTemp = kelvinToFahrenheit(weather.main.temp)
-        let asphaltTemp = calculateAsphaltTemperature(airTemp: airTemp)
-        let concreteTemp = calculateConcreteTemperature(airTemp: airTemp)
+  //  var body: some View {
         
+//        let airTemp = kelvinToFahrenheit(weather.main.temp)
+//        let asphaltTemp = calculateAsphaltTemperature(airTemp: airTemp)
+//        let concreteTemp = calculateConcreteTemperature(airTemp: airTemp)
+//        
+//        NavigationView {
+//            ScrollView {
+//                VStack(alignment: .leading) {
+//                    GeometryReader { geometry in
+//                        VStack {
+//                            HStack {
+//                                SearchBar(text: $city, onSearch: loadWeather)
+//                                Button(action: {
+//                                    loadWeather()
+//                                }) {
+//                                    Text("Search")
+//                                        .bold()
+//                                        .padding()
+//                                        .frame(maxHeight: 36)
+//                                        .background(Color.white)
+//                                        .foregroundColor(.blue)
+//                                        .cornerRadius(25)
+//                                }
+//                            }
+//                            .padding(.top, -25)
+//                            
+//                            VStack(alignment: .leading, spacing: 5) {
+//                                Text(weather.name)
+//                                    .bold().font(.title)
+//                                Text("\(Date().formatted(.dateTime.month().day().hour().minute()))")
+//                                    .fontWeight(.light)
+//                            }
+//                            .frame(maxWidth: .infinity, alignment: .leading)
+//                            
+//                            Spacer()
+//                            
+//                            VStack {
+//                                HStack {
+//                                    VStack(spacing: 20) {
+//                                        Image(systemName: getSystemImageName(for: weather.weather[0].main))
+//                                            .font(.system(size: 50))
+//                                        
+//                                        Text("\(weather.weather[0].main)")
+//                                    }
+//                                    .frame(width: 150, alignment: .leading)
+//                                    
+//                                    Spacer()
+//                                    
+//                                    Text(kelvinToFahrenheit(weather.main.temp).roundDouble() + "°")
+//                                        .font(.system(size: 90))
+//                                        .fontWeight(.bold)
+//                                }
+//                                
+//                                Spacer().frame(height: 15)
+//                                
+//                                Image(getLocalImageName(for: weather.weather[0].main))
+//                                    .resizable()
+//                                    .aspectRatio(contentMode: .fill)
+//                                    .frame(width: 300, height: 280)
+//                                    .cornerRadius(40)
+//                                    .padding(.bottom, 20)
+//                                
+//                                Spacer()
+//                            }
+//                            .frame(maxWidth: .infinity)
+//                            
+//                            VStack(alignment: .leading, spacing: 15) {
+//                                Text("Current Weather").bold().padding(.bottom)
+//                                
+//                                HStack {
+//                                    WeatherRow(logo: "thermometer", name: "Min", value: (kelvinToFahrenheit(weather.main.tempMin).roundDouble()) + "°")
+//                                    Spacer()
+//                                    WeatherRow(logo: "thermometer", name: "Max", value: (kelvinToFahrenheit(weather.main.tempMax).roundDouble()) + "°  ")
+//                                }
+//                                HStack {
+//                                    WeatherRow(logo: "wind", name: "Wind", value: (weather.wind.speed.roundDouble() + "m/s"))
+//                                    Spacer()
+//                                    WeatherRow(logo: "humidity.fill", name: "Humidity", value: (weather.main.humidity.roundDouble() + "%"))
+//                                }
+//                                HStack {
+//                                    WeatherRow(logo: "pawprint", name: "Asphalt", value: "\(asphaltTemp)°")
+//                                    Spacer()
+//                                    WeatherRow(logo: "pawprint.fill", name: "Concrete", value: "\(concreteTemp)°")
+//                                }
+//                            }
+//                            .frame(maxWidth: .infinity, alignment: .leading)
+//                            .padding()
+//                            .padding(.bottom, 20)
+//                            .foregroundColor(Color(hue: 0.637, saturation: 0.822, brightness: 0.456))
+//                            .background(.white)
+//                            .cornerRadius(20, corners: [.topLeft, .topRight])
+//                        }
+//                        .padding()
+//                        .frame(maxWidth: .infinity, alignment: .leading)
+//                    }
+//                }
+//            }
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    HStack {
+//                        Image(systemName: "pawprint.fill")
+//                            .foregroundColor(.white)
+//                        Text("WoofWeather")
+//                            .font(.system(size: 20, weight: .bold))
+//                            .foregroundColor(.white)
+//                    }
+//                }
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                                    Button(action: {
+//                                        showingLoginSignup = true
+//                                    }) {
+//                                        Text("Login/Signup")
+//                                            .foregroundColor(.white)
+//                                    }
+//                                }
+//                            }
+//            // Present LoginSignupView when showingLoginSignup is true
+//            .fullScreenCover(isPresented: $showingLoginSignup) {
+//                LoginSignupView()
+//            }
+//            .edgesIgnoringSafeArea(.bottom)
+//            .background(isDayTime ? Color.blue : Color(red: 0.0, green: 0.0, blue: 0.5))
+//            .preferredColorScheme(.dark)
+//        }
+//    }
+    
+    var body: some View {
         NavigationView {
             ScrollView {
-                VStack(alignment: .leading) {
-                    GeometryReader { geometry in
-                        VStack {
-                            HStack {
-                                SearchBar(text: $city, onSearch: loadWeather)
-                                Button(action: {
-                                    loadWeather()
-                                }) {
-                                    Text("Search")
-                                        .bold()
-                                        .padding()
-                                        .frame(maxHeight: 36)
-                                        .background(Color.white)
-                                        .foregroundColor(.blue)
-                                        .cornerRadius(25)
-                                }
-                            }
-                            .padding(.top, -25)
-                            
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text(weather.name)
-                                    .bold().font(.title)
-                                Text("\(Date().formatted(.dateTime.month().day().hour().minute()))")
-                                    .fontWeight(.light)
-                            }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            
-                            Spacer()
-                            
+                if let weather = weather {
+                    // Calculate temperatures
+                    let airTemp = kelvinToFahrenheit(weather.main.temp)
+                    let asphaltTemp = calculateAsphaltTemperature(airTemp: airTemp)
+                    let concreteTemp = calculateConcreteTemperature(airTemp: airTemp)
+
+                    VStack(alignment: .leading) {
+                        GeometryReader { geometry in
                             VStack {
+                                // Search Bar and Button
                                 HStack {
-                                    VStack(spacing: 20) {
-                                        Image(systemName: getSystemImageName(for: weather.weather[0].main))
-                                            .font(.system(size: 50))
-                                        
-                                        Text("\(weather.weather[0].main)")
+                                    SearchBar(text: $city, onSearch: loadWeather)
+                                    Button(action: loadWeather) {
+                                        Text("Search")
+                                            .bold()
+                                            .padding()
+                                            .frame(maxHeight: 36)
+                                            .background(Color.white)
+                                            .foregroundColor(.blue)
+                                            .cornerRadius(25)
                                     }
-                                    .frame(width: 150, alignment: .leading)
-                                    
-                                    Spacer()
-                                    
-                                    Text(kelvinToFahrenheit(weather.main.temp).roundDouble() + "°")
-                                        .font(.system(size: 90))
-                                        .fontWeight(.bold)
                                 }
-                                
-                                Spacer().frame(height: 15)
-                                
-                                Image(getLocalImageName(for: weather.weather[0].main))
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 300, height: 280)
-                                    .cornerRadius(40)
-                                    .padding(.bottom, 20)
-                                
+                                .padding(.top, -25)
+
+                                // City and Date
+                                VStack(alignment: .leading, spacing: 5) {
+                                    Text(weather.name)
+                                        .bold().font(.title)
+                                    Text("\(Date().formatted(.dateTime.month().day().hour().minute()))")
+                                        .fontWeight(.light)
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+
                                 Spacer()
+
+                                // Weather Icon and Description
+                                VStack {
+                                    HStack {
+                                        VStack(spacing: 20) {
+                                            Image(systemName: getSystemImageName(for: weather.weather[0].main))
+                                                .font(.system(size: 50))
+                                            Text("\(weather.weather[0].main)")
+                                        }
+                                        .frame(width: 150, alignment: .leading)
+
+                                        Spacer()
+
+                                        Text("\(airTemp.roundDouble())°")
+                                            .font(.system(size: 90))
+                                            .fontWeight(.bold)
+                                    }
+
+                                    Spacer().frame(height: 15)
+
+                                    Image(getLocalImageName(for: weather.weather[0].main))
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 300, height: 280)
+                                        .cornerRadius(40)
+                                        .padding(.bottom, 20)
+
+                                    Spacer()
+                                }
+                                .frame(maxWidth: .infinity)
+
+                                // Weather Details
+                                VStack(alignment: .leading, spacing: 15) {
+                                    Text("Current Weather").bold().padding(.bottom)
+
+                                    HStack {
+                                        WeatherRow(logo: "thermometer", name: "Min", value: "\(kelvinToFahrenheit(weather.main.tempMin).roundDouble())°")
+                                        Spacer()
+                                        WeatherRow(logo: "thermometer", name: "Max", value: "\(kelvinToFahrenheit(weather.main.tempMax).roundDouble())°")
+                                    }
+                                    HStack {
+                                        WeatherRow(logo: "wind", name: "Wind", value: "\(weather.wind.speed.roundDouble()) m/s")
+                                        Spacer()
+                                        WeatherRow(logo: "humidity.fill", name: "Humidity", value: "\(weather.main.humidity.roundDouble())%")
+                                    }
+                                    HStack {
+                                        WeatherRow(logo: "pawprint", name: "Asphalt", value: "\(asphaltTemp)°")
+                                        Spacer()
+                                        WeatherRow(logo: "pawprint.fill", name: "Concrete", value: "\(concreteTemp)°")
+                                    }
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding()
+                                .padding(.bottom, 20)
+                                .foregroundColor(Color(hue: 0.637, saturation: 0.822, brightness: 0.456))
+                                .background(.white)
+                                .cornerRadius(20, corners: [.topLeft, .topRight])
                             }
-                            .frame(maxWidth: .infinity)
-                            
-                            VStack(alignment: .leading, spacing: 15) {
-                                Text("Current Weather").bold().padding(.bottom)
-                                
-                                HStack {
-                                    WeatherRow(logo: "thermometer", name: "Min", value: (kelvinToFahrenheit(weather.main.tempMin).roundDouble()) + "°")
-                                    Spacer()
-                                    WeatherRow(logo: "thermometer", name: "Max", value: (kelvinToFahrenheit(weather.main.tempMax).roundDouble()) + "°  ")
-                                }
-                                HStack {
-                                    WeatherRow(logo: "wind", name: "Wind", value: (weather.wind.speed.roundDouble() + "m/s"))
-                                    Spacer()
-                                    WeatherRow(logo: "humidity.fill", name: "Humidity", value: (weather.main.humidity.roundDouble() + "%"))
-                                }
-                                HStack {
-                                    WeatherRow(logo: "pawprint", name: "Asphalt", value: "\(asphaltTemp)°")
-                                    Spacer()
-                                    WeatherRow(logo: "pawprint.fill", name: "Concrete", value: "\(concreteTemp)°")
-                                }
-                            }
-                            .frame(maxWidth: .infinity, alignment: .leading)
                             .padding()
-                            .padding(.bottom, 20)
-                            .foregroundColor(Color(hue: 0.637, saturation: 0.822, brightness: 0.456))
-                            .background(.white)
-                            .cornerRadius(20, corners: [.topLeft, .topRight])
+                            .frame(maxWidth: .infinity, alignment: .leading)
                         }
-                        .padding()
-                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
+                } else {
+                    // Fallback for when `weather` is nil
+                    Text("No data available")
+                        .font(.headline)
+                        .foregroundColor(.gray)
+                        .padding()
                 }
             }
             .toolbar {
@@ -243,15 +380,12 @@ struct WeatherView: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                                    Button(action: {
-                                        showingLoginSignup = true
-                                    }) {
-                                        Text("Login/Signup")
-                                            .foregroundColor(.white)
-                                    }
-                                }
-                            }
-            // Present LoginSignupView when showingLoginSignup is true
+                    Button(action: { showingLoginSignup = true }) {
+                        Text("Login/Signup")
+                            .foregroundColor(.white)
+                    }
+                }
+            }
             .fullScreenCover(isPresented: $showingLoginSignup) {
                 LoginSignupView()
             }
@@ -260,6 +394,8 @@ struct WeatherView: View {
             .preferredColorScheme(.dark)
         }
     }
+
+    
 }
 
 #Preview {

@@ -84,7 +84,7 @@ struct LoginSignupView: View {
     }
 
     func login() {
-        guard let url = URL(string: "http://localhost:8080/login") else {
+        guard let url = URL(string: "http://127.0.0.1:8080/signup") else {
             errorMessage = "Invalid server URL."
             return
         }
@@ -120,13 +120,25 @@ struct LoginSignupView: View {
             return
         }
 
-        guard let url = URL(string: "http://localhost:8080/signup") else {
+        guard let url = URL(string: "http://127.0.0.1:8080/signup") else {
             errorMessage = "Invalid server URL."
             return
         }
 
-        let signupData = ["email": email, "password": password]
-        let jsonData = try? JSONSerialization.data(withJSONObject: signupData)
+        let signupData = [
+            "email": email,
+            "password": password,
+            "confirmPassword": confirmPassword
+        ]
+        
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: signupData) else {
+            errorMessage = "Failed to serialize signup data."
+            return
+        }
+        //debugging
+        if let jsonString = String(data: jsonData, encoding: .utf8) {
+             print("Request JSON: \(jsonString)")
+         }
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -140,6 +152,10 @@ struct LoginSignupView: View {
                     self.errorMessage = error.localizedDescription
                     return
                 }
+                
+                if let jsonString = String(data: jsonData, encoding: .utf8) {
+                     print("Request JSON: \(jsonString)")
+                 }
                 guard let data = data else {
                     self.errorMessage = "No data received."
                     return

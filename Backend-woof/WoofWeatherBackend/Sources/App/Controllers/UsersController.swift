@@ -12,6 +12,8 @@ struct UsersController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         routes.post("signup", use: signup)
         routes.post("login", use: login)
+        // New route to get all users
+        routes.get("users", use: getAllUsers)
     }
 
     func signup(req: Request) throws -> EventLoopFuture<User.Public> {
@@ -45,6 +47,13 @@ struct UsersController: RouteCollection {
                 }
             }
     }
+    
+    func getAllUsers(req: Request) throws -> EventLoopFuture<[User.Public]> {
+        return User.query(on: req.db).all().map { users in
+            users.map { $0.convertToPublic() }
+        }
+    }
+
 }
 
 // Request DTOs
