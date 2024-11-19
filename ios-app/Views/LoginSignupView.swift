@@ -83,6 +83,37 @@ struct LoginSignupView: View {
         }
     }
 
+//    func login() {
+//        guard let url = URL(string: "http://127.0.0.1:8080/login") else {
+//            errorMessage = "Invalid server URL."
+//            return
+//        }
+//
+//        let loginData = ["email": email, "password": password]
+//        let jsonData = try? JSONSerialization.data(withJSONObject: loginData)
+//
+//        var request = URLRequest(url: url)
+//        request.httpMethod = "POST"
+//        request.httpBody = jsonData
+//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//
+//        URLSession.shared.dataTask(with: request) { data, response, error in
+//            // Handle response
+//            DispatchQueue.main.async {
+//                if let error = error {
+//                    self.errorMessage = error.localizedDescription
+//                    return
+//                }
+//                guard let data = data else {
+//                    self.errorMessage = "No data received."
+//                    return
+//                }
+//                // Process data
+//                self.dismiss()
+//            }
+//        }.resume()
+//    }
+    
     func login() {
         guard let url = URL(string: "http://127.0.0.1:8080/login") else {
             errorMessage = "Invalid server URL."
@@ -98,21 +129,42 @@ struct LoginSignupView: View {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         URLSession.shared.dataTask(with: request) { data, response, error in
-            // Handle response
             DispatchQueue.main.async {
                 if let error = error {
                     self.errorMessage = error.localizedDescription
+                    print("Error logging in: \(error.localizedDescription)")
                     return
                 }
+                
                 guard let data = data else {
                     self.errorMessage = "No data received."
+                    print("Login failed: No data received.")
                     return
                 }
-                // Process data
-                self.dismiss()
+
+                if let response = response as? HTTPURLResponse {
+                    if response.statusCode == 200 {
+                        // Login successful
+                        print("User signed in successfully!")
+                        
+                        // Optional: Process the response data
+                        if let responseBody = String(data: data, encoding: .utf8) {
+                            print("Response Body: \(responseBody)")
+                        }
+
+                        self.dismiss()
+                    } else {
+                        // Login failed with an HTTP error
+                        self.errorMessage = "Login failed with status code: \(response.statusCode)"
+                        print("Login failed: Status code \(response.statusCode)")
+                    }
+                } else {
+                    print("Unexpected response format.")
+                }
             }
         }.resume()
     }
+
 
     func signup() {
         if password != confirmPassword {
