@@ -1,20 +1,10 @@
-//import Fluent
-//import Vapor
 
-//func routes(_ app: Application) throws {
-//    app.get { req async in
-//        "It works!"
-//    }
-//
-//    app.get("hello") { req async -> String in
-//        "Hello, world!"
-//    }
-//
-//  ///  try app.register(collection: TodoController())
-//}
 import Vapor
 
 func routes(_ app: Application) throws {
     let usersController = UsersController()
     try app.register(collection: usersController)
+    
+    let favoritesController = FavoritesController()
+    try app.register(collection: favoritesController)
 }

@@ -1,9 +1,3 @@
-//
-//  WeatherManager.swift
-//  ios-app
-//
-//  Created by Lucy Bellott on 6/19/24.
-//
 
 import Foundation
 import CoreLocation

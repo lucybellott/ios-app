@@ -1,9 +1,3 @@
-//
-//  NavigationTitleView.swift
-//  WoofWeather
-//
-//  Created by Lucy Bellott on 9/10/24.
-//
 
 import SwiftUI
 

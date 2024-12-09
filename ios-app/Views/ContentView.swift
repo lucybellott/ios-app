@@ -1,9 +1,3 @@
-//
-//  ContentView.swift
-//  ios-app
-//
-//  Created by Lucy Bellott on 6/18/24.
-//
 
 import SwiftUI
 

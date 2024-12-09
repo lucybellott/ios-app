@@ -10,19 +10,23 @@
 //    @State private var errorMessage: String?
 //    @StateObject private var weatherManager = WeatherManager()
 //    @State private var showingLoginSignup = false
-//    @State private var isLoggedIn = false // Track logged-in state
+//    @State private var isLoggedIn = false
+//
+//    //Favorites and tab tracking
+//    @State private var favoriteCities: [String] = []
+//    @State private var selectedTab: Int = 0
 //
 //    // Function to convert Kelvin to Fahrenheit
 //    func kelvinToFahrenheit(_ kelvin: Double) -> Double {
 //        return (kelvin - 273.15) * 9 / 5 + 32
 //    }
 //
-//    // Function to calculate asphalt temperature based on air temperature
+//    // Function to calculate asphalt temperature
 //    func calculateAsphaltTemperature(airTemp: Double) -> Int {
 //        return Int(airTemp * 1.2 + 20)
 //    }
 //
-//    // Function to calculate concrete temperature based on air temperature
+//    // Function to calculate concrete temperature
 //    func calculateConcreteTemperature(airTemp: Double) -> Int {
 //        return Int(airTemp * 1.1 + 15)
 //    }
@@ -92,6 +96,12 @@
 //        }
 //    }
 //
+//    // Add city to favorites
+//    func addCityToFavorites(_ city: String) {
+//        guard !favoriteCities.contains(city) else { return }
+//        favoriteCities.append(city)
+//    }
+//
 //    // Computed property to determine if it is daytime or nighttime
 //    private var isDayTime: Bool {
 //        let currentHour = Calendar.current.component(.hour, from: Date())
@@ -99,137 +109,179 @@
 //    }
 //
 //    var body: some View {
-//        NavigationView {
-//            ScrollView {
-//                if let weather = weather {
-//                    // Calculate temperatures
-//                    let airTemp = kelvinToFahrenheit(weather.main.temp)
-//                    let asphaltTemp = calculateAsphaltTemperature(airTemp: airTemp)
-//                    let concreteTemp = calculateConcreteTemperature(airTemp: airTemp)
+//        // NEW: Wrap content in a TabView with two tabs
+//        TabView(selection: $selectedTab) {
+//            // Weather Tab
+//            NavigationView {
+//                ScrollView {
+//                    if let weather = weather {
+//                        // Calculate temperatures
+//                        let airTemp = kelvinToFahrenheit(weather.main.temp)
+//                        let asphaltTemp = calculateAsphaltTemperature(airTemp: airTemp)
+//                        let concreteTemp = calculateConcreteTemperature(airTemp: airTemp)
 //
-//                    VStack(alignment: .leading) {
-//                        HStack {
-//                            SearchBar(text: $city, onSearch: loadWeather)
-//                            Button(action: loadWeather) {
-//                                Text("Search")
-//                                    .bold()
-//                                    .padding()
-//                                    .frame(maxHeight: 36)
-//                                    .background(Color.white)
-//                                    .foregroundColor(.blue)
-//                                    .cornerRadius(25)
-//                            }
-//                        }
-//                        .padding(.top)
-//
-//                        Text(weather.name)
-//                            .bold()
-//                            .font(.title)
-//
-//                        Text("\(Date().formatted(.dateTime.month().day().hour().minute()))")
-//                            .fontWeight(.light)
-//
-//                        Spacer()
-//
-//                        VStack {
+//                        VStack(alignment: .leading) {
 //                            HStack {
-//                                VStack(spacing: 20) {
-//                                    Image(systemName: getSystemImageName(for: weather.weather[0].main))
-//                                        .font(.system(size: 50))
-//                                    Text("\(weather.weather[0].main)")
+//                                SearchBar(text: $city, onSearch: loadWeather)
+//                                Button(action: loadWeather) {
+//                                    Text("Search")
+//                                        .bold()
+//                                        .padding()
+//                                        .frame(maxHeight: 36)
+//                                        .background(Color.white)
+//                                        .foregroundColor(.blue)
+//                                        .cornerRadius(25)
 //                                }
-//                                .frame(width: 150, alignment: .leading)
+//                            }
+//                            .padding(.top)
 //
-//                                Spacer()
+//                            // Heart button if logged in
+//                            HStack {
+//                                Text(weather.name)
+//                                    .bold()
+//                                    .font(.title)
 //
-//                                Text("\(airTemp.roundDouble())°")
-//                                    .font(.system(size: 90))
-//                                    .fontWeight(.bold)
+//                                if isLoggedIn {
+//                                    Button(action: {
+//                                        addCityToFavorites(weather.name)
+//                                    }) {
+//                                        Image(systemName: favoriteCities.contains(weather.name) ? "heart.fill" : "heart")
+//                                            .foregroundColor(favoriteCities.contains(weather.name) ? .red : .white)
+//                                    }
+//                                }
 //                            }
 //
-//                            Spacer().frame(height: 15)
+//                            Text("\(Date().formatted(.dateTime.month().day().hour().minute()))")
+//                                .fontWeight(.light)
 //
-//                            Image(getLocalImageName(for: weather.weather[0].main))
-//                                .resizable()
-//                                .aspectRatio(contentMode: .fill)
-//                                .frame(width: 300, height: 280)
-//                                .cornerRadius(40)
-//                                .padding(.bottom, 20)
+//                            Spacer()
+//
+//                            VStack {
+//                                HStack {
+//                                    VStack(spacing: 20) {
+//                                        Image(systemName: getSystemImageName(for: weather.weather[0].main))
+//                                            .font(.system(size: 50))
+//                                        Text("\(weather.weather[0].main)")
+//                                    }
+//                                    .frame(width: 150, alignment: .leading)
+//
+//                                    Spacer()
+//
+//                                    Text("\(airTemp.roundDouble())°")
+//                                        .font(.system(size: 90))
+//                                        .fontWeight(.bold)
+//                                }
+//
+//                                Spacer().frame(height: 15)
+//
+//                                Image(getLocalImageName(for: weather.weather[0].main))
+//                                    .resizable()
+//                                    .aspectRatio(contentMode: .fill)
+//                                    .frame(width: 300, height: 280)
+//                                    .cornerRadius(40)
+//                                    .padding(.bottom, 20)
+//                            }
+//                            .frame(maxWidth: .infinity)
+//
+//                            Spacer()
+//
+//                            // Weather Rows
+//                            VStack(alignment: .leading, spacing: 15) {
+//                                Text("Current Weather").bold().padding(.bottom)
+//
+//                                HStack {
+//                                    WeatherRow(logo: "thermometer", name: "Min", value: "\(kelvinToFahrenheit(weather.main.tempMin).roundDouble())°")
+//                                    Spacer()
+//                                    WeatherRow(logo: "thermometer", name: "Max", value: "\(kelvinToFahrenheit(weather.main.tempMax).roundDouble())°")
+//                                }
+//                                HStack {
+//                                    WeatherRow(logo: "wind", name: "Wind", value: "\(weather.wind.speed.roundDouble()) m/s")
+//                                    Spacer()
+//                                    WeatherRow(logo: "humidity.fill", name: "Humidity", value: "\(weather.main.humidity.roundDouble())%")
+//                                }
+//                                HStack {
+//                                    WeatherRow(logo: "pawprint", name: "Asphalt", value: "\(asphaltTemp)°")
+//                                    Spacer()
+//                                    WeatherRow(logo: "pawprint.fill", name: "Concrete", value: "\(concreteTemp)°")
+//                                }
+//                            }
+//                            .frame(maxWidth: .infinity, alignment: .leading)
+//                            .padding()
+//                            .padding(.bottom, 20)
+//                            .foregroundColor(Color(hue: 0.637, saturation: 0.822, brightness: 0.456))
+//                            .background(.white)
+//                            .cornerRadius(20, corners: [.topLeft, .topRight])
 //                        }
-//                        .frame(maxWidth: .infinity)
-//
-//                        Spacer()
-//
-//                        // Additional Weather Rows
-//                        VStack(alignment: .leading, spacing: 15) {
-//                            Text("Current Weather").bold().padding(.bottom)
-//
-//                            HStack {
-//                                WeatherRow(logo: "thermometer", name: "Min", value: "\(kelvinToFahrenheit(weather.main.tempMin).roundDouble())°")
-//                                Spacer()
-//                                WeatherRow(logo: "thermometer", name: "Max", value: "\(kelvinToFahrenheit(weather.main.tempMax).roundDouble())°")
-//                            }
-//                            HStack {
-//                                WeatherRow(logo: "wind", name: "Wind", value: "\(weather.wind.speed.roundDouble()) m/s")
-//                                Spacer()
-//                                WeatherRow(logo: "humidity.fill", name: "Humidity", value: "\(weather.main.humidity.roundDouble())%")
-//                            }
-//                            HStack {
-//                                WeatherRow(logo: "pawprint", name: "Asphalt", value: "\(asphaltTemp)°")
-//                                Spacer()
-//                                WeatherRow(logo: "pawprint.fill", name: "Concrete", value: "\(concreteTemp)°")
-//                            }
-//                        }
-//                        .frame(maxWidth: .infinity, alignment: .leading)
 //                        .padding()
-//                        .padding(.bottom, 20)
-//                        .foregroundColor(Color(hue: 0.637, saturation: 0.822, brightness: 0.456))
-//                        .background(.white)
-//                        .cornerRadius(20, corners: [.topLeft, .topRight])
-//                    }
-//                    .padding()
-//                } else {
-//                    Text("No data available")
-//                        .font(.headline)
-//                        .foregroundColor(.gray)
-//                        .padding()
-//                }
-//            }
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarLeading) {
-//                    HStack {
-//                        Image(systemName: "pawprint.fill")
-//                            .foregroundColor(.white)
-//                        Text("WoofWeather")
-//                            .font(.system(size: 20, weight: .bold))
-//                            .foregroundColor(.white)
-//                    }
-//                }
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    if isLoggedIn {
-//                        Button(action: {
-//                            isLoggedIn = false // Log the user out
-//                        }) {
-//                            Text("Logout")
-//                                .foregroundColor(.white)
-//                        }
+//                    } else if isLoading {
+//                        ProgressView().padding()
+//                    } else if let errorMessage = errorMessage {
+//                        Text(errorMessage)
+//                            .foregroundColor(.red)
+//                            .padding()
 //                    } else {
-//                        Button(action: { showingLoginSignup = true }) {
-//                            Text("Login/Signup")
+//                        Text("No data available")
+//                            .font(.headline)
+//                            .foregroundColor(.gray)
+//                            .padding()
+//                    }
+//                }
+//                .toolbar {
+//                    ToolbarItem(placement: .navigationBarLeading) {
+//                        HStack {
+//                            Image(systemName: "pawprint.fill")
+//                                .foregroundColor(.white)
+//                            Text("WoofWeather")
+//                                .font(.system(size: 20, weight: .bold))
 //                                .foregroundColor(.white)
 //                        }
 //                    }
+//                    ToolbarItem(placement: .navigationBarTrailing) {
+//                        if isLoggedIn {
+//                            Button(action: {
+//                                isLoggedIn = false // Log user out
+//                                selectedTab = 0
+//                                onLogout?()
+//                            }) {
+//                                Text("Logout")
+//                                    .foregroundColor(.white)
+//                            }
+//                        } else {
+//                            Button(action: { showingLoginSignup = true }) {
+//                                Text("Login/Signup")
+//                                    .foregroundColor(.white)
+//                            }
+//                        }
+//                    }
 //                }
+//                .fullScreenCover(isPresented: $showingLoginSignup) {
+//                    LoginSignupView(onLogin: {
+//                        showingLoginSignup = false
+//                        isLoggedIn = true
+//                    })
+//                }
+//                .edgesIgnoringSafeArea(.bottom)
+//                .background(isDayTime ? Color.blue : Color(red: 0.0, green: 0.0, blue: 0.5))
+//                .preferredColorScheme(.dark)
 //            }
-//            .fullScreenCover(isPresented: $showingLoginSignup) {
-//                LoginSignupView(onLogin: {
-//                    showingLoginSignup = false // Dismiss the login view
-//                    isLoggedIn = true
-//                })
+//            .tabItem {
+//                Label("Weather", systemImage: "cloud.sun")
 //            }
-//            .edgesIgnoringSafeArea(.bottom)
-//            .background(isDayTime ? Color.blue : Color(red: 0.0, green: 0.0, blue: 0.5))
-//            .preferredColorScheme(.dark)
+//            .tag(0)
+//
+//            // Favorites Tab
+//            FavoriteCitiesView(
+//                favoriteCities: $favoriteCities,
+//                onSelectCity: { selectedCity in
+//                    city = selectedCity
+//                    selectedTab = 0
+//                    loadWeather()
+//                }
+//            )
+//            .tabItem {
+//                Label("Favorites", systemImage: "heart")
+//            }
+//            .tag(1)
 //        }
 //    }
 //}
@@ -248,28 +300,32 @@ struct WeatherView: View {
     @State private var errorMessage: String?
     @StateObject private var weatherManager = WeatherManager()
     @State private var showingLoginSignup = false
-    @State private var isLoggedIn = false // Track logged-in state
+    @State private var isLoggedIn = false
 
-    // NEW: Favorites and tab tracking
+    // Favorites and tab tracking
     @State private var favoriteCities: [String] = []
     @State private var selectedTab: Int = 0
 
-    // Function to convert Kelvin to Fahrenheit
+    // Replace with actual logic or coordinates for current location
+    let currentLatitude = 40.7128
+    let currentLongitude = -74.0060
+
+    // Convert Kelvin to Fahrenheit
     func kelvinToFahrenheit(_ kelvin: Double) -> Double {
         return (kelvin - 273.15) * 9 / 5 + 32
     }
 
-    // Function to calculate asphalt temperature
+    // Calculate asphalt temperature
     func calculateAsphaltTemperature(airTemp: Double) -> Int {
         return Int(airTemp * 1.2 + 20)
     }
 
-    // Function to calculate concrete temperature
+    // Calculate concrete temperature
     func calculateConcreteTemperature(airTemp: Double) -> Int {
         return Int(airTemp * 1.1 + 15)
     }
 
-    // Function to get the image URL based on the weather condition
+    // Get local image name for weather condition
     func getLocalImageName(for weatherCondition: String) -> String {
         switch weatherCondition.lowercased() {
         case "clouds": return "clouds"
@@ -291,7 +347,7 @@ struct WeatherView: View {
         }
     }
 
-    // Function to get the system icon name based on the weather condition
+    // Get system icon name for weather condition
     func getSystemImageName(for weatherCondition: String) -> String {
         let imageName: String
         switch weatherCondition.lowercased() {
@@ -313,7 +369,7 @@ struct WeatherView: View {
         return imageName
     }
 
-    // Function to load weather data for the entered city
+    // Load weather by city
     func loadWeather() {
         guard !city.isEmpty else {
             errorMessage = "Please enter a city name."
@@ -334,26 +390,46 @@ struct WeatherView: View {
         }
     }
 
-    // NEW: Add city to favorites if not already present
+    // Add city to favorites
     func addCityToFavorites(_ city: String) {
         guard !favoriteCities.contains(city) else { return }
         favoriteCities.append(city)
     }
 
-    // Computed property to determine if it is daytime or nighttime
+    // After logout, load weather for current location
+    func loadWeatherForCurrentLocation() {
+        isLoading = true
+        errorMessage = nil
+        Task {
+            do {
+                // Use getCurrentWeather since we have lat/lon
+                weather = try await weatherManager.getCurrentWeather(latitude: currentLatitude, longitude: currentLongitude)
+            } catch {
+                errorMessage = "Could not fetch weather for current location."
+                print("Error fetching location-based weather: \(error.localizedDescription)")
+            }
+            isLoading = false
+        }
+    }
+
+    // Determine daytime or nighttime
     private var isDayTime: Bool {
         let currentHour = Calendar.current.component(.hour, from: Date())
         return currentHour >= 7 && currentHour < 19
     }
 
     var body: some View {
-        // NEW: Wrap content in a TabView with two tabs
         TabView(selection: $selectedTab) {
-            // Weather Tab
+            // Weather tab
             NavigationView {
                 ScrollView {
-                    if let weather = weather {
-                        // Calculate temperatures
+                    if isLoading {
+                        ProgressView().padding()
+                    } else if let errorMessage = errorMessage {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                            .padding()
+                    } else if let weather = weather {
                         let airTemp = kelvinToFahrenheit(weather.main.temp)
                         let asphaltTemp = calculateAsphaltTemperature(airTemp: airTemp)
                         let concreteTemp = calculateConcreteTemperature(airTemp: airTemp)
@@ -373,13 +449,12 @@ struct WeatherView: View {
                             }
                             .padding(.top)
 
-                            // City Name + Heart button if logged in
                             HStack {
                                 Text(weather.name)
                                     .bold()
                                     .font(.title)
 
-                                if isLoggedIn { // NEW: Only show heart if logged in
+                                if isLoggedIn {
                                     Button(action: {
                                         addCityToFavorites(weather.name)
                                     }) {
@@ -423,7 +498,6 @@ struct WeatherView: View {
 
                             Spacer()
 
-                            // Additional Weather Rows
                             VStack(alignment: .leading, spacing: 15) {
                                 Text("Current Weather").bold().padding(.bottom)
 
@@ -451,12 +525,6 @@ struct WeatherView: View {
                             .cornerRadius(20, corners: [.topLeft, .topRight])
                         }
                         .padding()
-                    } else if isLoading {
-                        ProgressView().padding()
-                    } else if let errorMessage = errorMessage {
-                        Text(errorMessage)
-                            .foregroundColor(.red)
-                            .padding()
                     } else {
                         Text("No data available")
                             .font(.headline)
@@ -477,8 +545,9 @@ struct WeatherView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         if isLoggedIn {
                             Button(action: {
-                                isLoggedIn = false // Log user out
+                                isLoggedIn = false
                                 selectedTab = 0
+                                loadWeatherForCurrentLocation() // After logout, show current location weather
                                 onLogout?()
                             }) {
                                 Text("Logout")
@@ -507,7 +576,7 @@ struct WeatherView: View {
             }
             .tag(0)
 
-            // Favorites Tab (Define FavoriteCitiesView in a separate file)
+            // Favorites Tab (in separate file: FavoriteCitiesView.swift)
             FavoriteCitiesView(
                 favoriteCities: $favoriteCities,
                 onSelectCity: { selectedCity in

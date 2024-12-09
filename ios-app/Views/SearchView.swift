@@ -1,9 +1,3 @@
-//
-//  SearchView.swift
-//  ios-app
-//
-//  Created by Lucy Bellott on 6/20/24.
-//
 
 import SwiftUI
 

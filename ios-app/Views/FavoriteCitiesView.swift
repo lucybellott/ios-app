@@ -1,32 +1,3 @@
-//import SwiftUI
-//
-//struct FavoriteCitiesView: View {
-//    @Binding var favoriteCities: [String] // Pass favorite cities list
-//    var onSelectCity: (String) -> Void    // Closure to handle city selection
-//
-//    var body: some View {
-//        NavigationView {
-//            List {
-//                ForEach(favoriteCities, id: \.self) { city in
-//                    Button(action: {
-//                        onSelectCity(city)
-//                    }) {
-//                        Text(city)
-//                            .underline()
-//                            .foregroundColor(.blue)
-//                    }
-//                }
-//                .onDelete(perform: removeCity)
-//            }
-//            .navigationTitle("Favorite Cities")
-//        }
-//    }
-//
-//    // Remove city from favorites
-//    func removeCity(at offsets: IndexSet) {
-//        favoriteCities.remove(atOffsets: offsets)
-//    }
-//}
 
 
 import SwiftUI
@@ -51,13 +22,13 @@ struct FavoriteCitiesView: View {
                     favoriteCities.remove(atOffsets: indexSet)
                 }
             }
-            .navigationTitle("Favorite Cities")
+            .navigationTitle("Favorite Cities 🐾")
         }
     }
 }
 
 #Preview {
-    // Provide a mock array of favorites and a mock onSelectCity closure for the preview
+    // Mock array of favorites and a mock onSelectCity closure
     StatefulPreviewWrapper(["New York", "Paris", "Tokyo"]) { binding in
         FavoriteCitiesView(favoriteCities: binding, onSelectCity: { selectedCity in
             print("Selected city: \(selectedCity)")
