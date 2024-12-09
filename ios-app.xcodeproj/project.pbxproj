@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E1913C82D07137E0004F494 /* FavoriteCitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1913C72D0713680004F494 /* FavoriteCitiesView.swift */; };
 		4E2826752C21FE6B0098AD7B /* ios_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2826742C21FE6B0098AD7B /* ios_appApp.swift */; };
 		4E2826772C21FE6B0098AD7B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2826762C21FE6B0098AD7B /* ContentView.swift */; };
 		4E2826792C21FE6B0098AD7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E2826782C21FE6B0098AD7B /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E1913C72D0713680004F494 /* FavoriteCitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCitiesView.swift; sourceTree = "<group>"; };
 		4E2826712C21FE6B0098AD7B /* WoofWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WoofWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E2826742C21FE6B0098AD7B /* ios_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_appApp.swift; sourceTree = "<group>"; };
 		4E2826762C21FE6B0098AD7B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 		4E2826852C2214AA0098AD7B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4E1913C72D0713680004F494 /* FavoriteCitiesView.swift */,
 				4EF4A3532CDAA8F100DCB800 /* LoginSignupView.swift */,
 				4E2826762C21FE6B0098AD7B /* ContentView.swift */,
 				4E2826862C2215860098AD7B /* WelcomeView.swift */,
@@ -207,6 +210,7 @@
 				4E2826892C2223120098AD7B /* LoadingView.swift in Sources */,
 				4E28268F2C238D2B0098AD7B /* PreviewData.swift in Sources */,
 				4E28268D2C238C7B0098AD7B /* WeatherView.swift in Sources */,
+				4E1913C82D07137E0004F494 /* FavoriteCitiesView.swift in Sources */,
 				4E7F5E232C90EC3E00E11F6E /* NavigationTitleView.swift in Sources */,
 				4E2826872C2215860098AD7B /* WelcomeView.swift in Sources */,
 				4E2826982C24B1170098AD7B /* SearchView.swift in Sources */,
