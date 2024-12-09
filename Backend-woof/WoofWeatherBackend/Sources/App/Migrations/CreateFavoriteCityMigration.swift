@@ -14,3 +14,4 @@ struct CreateFavoriteCityMigration: Migration {
     }
 }
 
+

@@ -14,6 +14,7 @@ public func configure(_ app: Application) throws {
     app.migrations.add(CreateTokenMigration())
     app.migrations.add(CreateFavoriteCityMigration())
 
+
     
     // MARK: - Middleware
 

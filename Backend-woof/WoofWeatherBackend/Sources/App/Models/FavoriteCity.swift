@@ -3,7 +3,7 @@ import Fluent
 
 final class FavoriteCity: Model, Content {
     static let schema = "favorite_cities"
-    
+
     @ID(key: .id)
     var id: UUID?
 
