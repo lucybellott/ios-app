@@ -1,9 +1,3 @@
-//
-//  UsersController.swift
-//  WoofWeatherBackend
-//
-//  Created by Lucy Bellott on 11/5/24.
-//
 
 import Vapor
 import Fluent
@@ -12,7 +6,6 @@ struct UsersController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         routes.post("signup", use: signup)
         routes.post("login", use: login)
-        // New route to get all users
         routes.get("users", use: getAllUsers)
     }
 

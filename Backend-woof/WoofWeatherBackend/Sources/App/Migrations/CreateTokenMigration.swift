@@ -1,9 +1,3 @@
-//
-//  CreateTokenMigration.swift
-//  WoofWeatherBackend
-//
-//  Created by Lucy Bellott on 11/5/24.
-//
 
 import Fluent
 
